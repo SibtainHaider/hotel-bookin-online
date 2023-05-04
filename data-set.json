@@ -1,0 +1,112 @@
+[
+      {
+        "name": "Grand Hotel",
+        "location": "New York City",
+        "rating": 4.5,
+        "booking_price": 200,
+        "num_rooms": 500,
+        "room_types": {
+          "king": 200,
+          "queen": 200,
+          "suite": 100
+        }
+      },
+      {
+        "name": "Hilton Hotel",
+        "location": "Los Angeles",
+        "rating": 4.2,
+        "booking_price": 180,
+        "num_rooms": 400,
+        "room_types": {
+          "king": 150,
+          "queen": 200,
+          "suite": 50
+        }
+      },
+      {
+        "name": "Marriott Hotel",
+        "location": "Chicago",
+        "rating": 4.4,
+        "booking_price": 190,
+        "num_rooms": 350,
+        "room_types": {
+          "king": 150,
+          "queen": 150,
+          "suite": 50
+        }
+      },
+      {
+        "name": "Ritz-Carlton",
+        "location": "San Francisco",
+        "rating": 4.8,
+        "booking_price": 300,
+        "num_rooms": 200,
+        "room_types": {
+          "king": 80,
+          "queen": 80,
+          "suite": 40
+        }
+      },
+      {
+        "name": "Four Seasons",
+        "location": "Miami",
+        "rating": 4.6,
+        "booking_price": 280,
+        "num_rooms": 300,
+        "room_types": {
+          "king": 100,
+          "queen": 150,
+          "suite": 50
+        }
+      },
+      {
+        "name": "W Hotel",
+        "location": "Austin",
+        "rating": 4.3,
+        "booking_price": 150,
+        "num_rooms": 250,
+        "room_types": {
+          "king": 100,
+          "queen": 100,
+          "suite": 50
+        }
+      },
+      {
+        "name": "The Plaza",
+        "location": "New York City",
+        "rating": 4.7,
+        "booking_price": 400,
+        "num_rooms": 150,
+        "room_types": {
+          "king": 50,
+          "queen": 75,
+          "suite": 25
+        }
+      },
+      {
+        "name": "Fairmont Hotel",
+        "location": "Seattle",
+        "rating": 4.2,
+        "booking_price": 170,
+        "num_rooms": 300,
+        "room_types": {
+          "king": 120,
+          "queen": 140,
+          "suite": 40
+        }
+      },
+      {
+        "name": "Mandarin Oriental",
+        "location": "Las Vegas",
+        "rating": 4.5,
+        "booking_price": 250,
+        "num_rooms": 200,
+        "room_types": {
+          "king": 80,
+          "queen": 80,
+          "suite": 40
+        }
+      }
+]
+       
+  
