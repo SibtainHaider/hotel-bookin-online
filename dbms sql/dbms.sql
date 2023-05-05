@@ -96,67 +96,28 @@ VALUES
 
 
 
-select hotel_id from hotel
+select hotel_id from hotel;
 
 
 INSERT INTO room_type (hotel_id, executive_room_a, prime_room_a, deluxe_room_a, executive_room_t, prime_room_t, deluxe_room_t, price)
 VALUES
-   ('r68R488LWwd9zmf', 5, 10, 20, 15, 25, 35, 5000),
-   ('eOnHU9RSo1yUI7b', 8, 12, 22, 20, 30, 40, 6000),
-   ('lhW6vDfwxE6DFrR', 7, 15, 25, 18, 35, 45, 5500),
-   ('Qg7Cu8ZdWHCoEI7', 6, 13, 23, 17, 27, 37, 4500),
-   ('6XuzqooqgHEZuaJ', 4, 8, 18, 12, 22, 32, 4000),
-   ('A7G3H1oZxPtRggY', 10, 20, 30, 25, 40, 50, 7000),
-   ('9mphIXMpgKAoged', 6, 12, 22, 16, 28, 38, 4500),
-   ('YtFqCg7WaErK6EU', 9, 18, 28, 22, 35, 45, 6500),
-   ('fxm10rMaeJRG91i', 8, 16, 26, 20, 32, 42, 6000),
-   ('WYDdGTP6lUTsP5e', 5, 10, 20, 15, 25, 35, 5000),
-   ('ZP6QwS3iixpX8yt', 7, 14, 24, 18, 33, 43, 5500),
-   ('lnEEeKSsPxEDNNf', 6, 12, 22, 16, 28, 38, 4500),
-   ('aptY1M2ncUHSUFr', 9, 19, 29, 23, 37, 47, 6500),
-   ('HoNqlAgP8Y5UlyR', 7, 16, 26, 18, 32, 42, 5500),
-   ('Co6sWcbjqnD2XLI', 5, 9, 19, 14, 24, 34, 4500),
-   ('dHkAumz8QuY9BTx', 7, 13, 23, 17, 30, 40, 5000),
-   ('T4KcjhGL7nLz5xE', 8, 15, 25, 20, 34, 44, 6000),
-   ('Z40qVT3LN3lyGQi', 6, 11, 21, 15, 26, 36, 4500),
-   ('3V8cJf6eLrcXe7t', 10, 21, 31, 27, 40, 50, 7500),
-   ('PYuE9FKlcCg1vv6', 6, 14, 24, 18, 32, 42, 5000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   ('US0ETjVUqkpDkg5', 5, 10, 20, 15, 25, 35, 5000),
+   ('sWDphdwv6dTeyB5', 8, 12, 22, 20, 30, 40, 6000),
+   ('gskL4mcSBKgrMz9', 7, 15, 25, 18, 35, 45, 5500),
+   ('zUBx9i8embDkjWI', 6, 13, 23, 17, 27, 37, 4500),
+   ('uDh4uYuE074mvF6', 4, 8, 18, 12, 22, 32, 4000),
+   ('MTM7zqeePmG4eiZ', 10, 20, 30, 25, 40, 50, 7000),
+   ('finAjDLuX3f55KG', 6, 12, 22, 16, 28, 38, 4500),
+   ('oD6kKiXK9fQy2So', 9, 18, 28, 22, 35, 45, 6500),
+   ('myrLPo8vG5f7HoK', 8, 16, 26, 20, 32, 42, 6000),
+   ('XLM6jP9tNkOyb56', 5, 10, 20, 15, 25, 35, 5000),
+   ('2nj175Ip8CuqjPe', 7, 14, 24, 18, 33, 43, 5500),
+   ('HCw47XDRbKMn8CD', 6, 12, 22, 16, 28, 38, 4500),
+   ('OBj9j2bkiEYmNBC', 9, 19, 29, 23, 37, 47, 6500),
+   ('Cnsv8uNUL86SIZh', 7, 16, 26, 18, 32, 42, 5500),
+   ('JPSjAi7ygp1y5XH', 5, 9, 19, 14, 24, 34, 4500),
+   ('RgjwlWPKBp01xfA', 7, 13, 23, 17, 30, 40, 5000),
+   ('RiaQR6KRnVSeKmb', 8, 15, 25, 20, 34, 44, 6000),
+   ('Yf9AR7dXFuf3I1t', 6, 11, 21, 15, 26, 36, 4500),
+   ('4BiDIcwmtfV69CG', 10, 21, 31, 27, 40, 50, 7500),
+   ('nGKDvmB2sGfTVO5', 6, 14, 24, 18, 32, 42, 5000);

@@ -47,7 +47,7 @@ app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   try {
     const { rows: user } = await pool.query(
-      `SELECT * FROM customer WHERE username = ${username}`
+      `SELECT * FROM customer WHERE username = '${username}'`
     );
     if (user[0]) {
       const passwordValid = await bcrypt.compare(password, user[0].password);
@@ -70,6 +70,33 @@ app.post("/login", async (req, res) => {
     console.log(err);
   }
 });
+
+app.post("/", async (req, res) => {
+  try {
+    const {rows: hotel } = await pool.query(
+      `SELECT * FROM hotel`
+    );
+    for(let i = 0; i < data.hotel.length; i++){
+      const {rows: room_type }= await pool.query(
+        `SELECT * FROM room_type WHERE hotel_id = hotel[i].hotel_id`
+      );
+        
+    }
+      if(hotel && room_type){
+        res.send({hotel:hotel,room:room_type, status: "200"})
+      }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
+
+
+
+
+
+
 app.listen(port, () => {
   console.log(`Listening on port ${port} at http://localhost:${port}`);
 });
