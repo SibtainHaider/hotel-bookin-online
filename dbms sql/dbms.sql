@@ -121,3 +121,9 @@ VALUES
    ('Yf9AR7dXFuf3I1t', 6, 11, 21, 15, 26, 36, 4500),
    ('4BiDIcwmtfV69CG', 10, 21, 31, 27, 40, 50, 7500),
    ('nGKDvmB2sGfTVO5', 6, 14, 24, 18, 32, 42, 5000);
+
+
+
+INSERT INTO customer (f_name,l_name,email,phone,username,password)
+VALUES 
+	('Sibtain','Haider','sibtain.moon@gmail.com','03128816802','sibbi','$2a$10$4S2.JjY.jP/KVmi48mIo7uAHtbBN/nJlH9Zm9HduGVcUZEE66ASSa');
