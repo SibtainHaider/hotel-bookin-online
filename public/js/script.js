@@ -6,6 +6,7 @@ const total_data = async(event)=>{
     },
   });
   const data = await result.json();
+  console.log(data.prices);
   
   newHTML = ''
   for(let i = 0; i < data.hotel.length; i++){
@@ -20,7 +21,7 @@ const total_data = async(event)=>{
           <div class="back">
             <p>Description:</p>
             <ul>
-              <li><a href="form.html" class="card-link">Executive Room: Rs${data.room_type.price}.</a></li>
+              <li><a href="form.html" class="card-link">Executive Room: Rs${data.prices[i].price}.</a></li>
               <li><a href="form.html" class="card-link">Prime Room</a></li>
               <li><a href="/form" class="card-link">Deluxe Room</a></li>
             </ul>
@@ -29,6 +30,6 @@ const total_data = async(event)=>{
       </div>`;
     }
     document.querySelector(".cards-section").innerHTML = newHTML;
-  console.log(data.hotel)
+  //console.log(data.hotel)
 }
 total_data();

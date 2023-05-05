@@ -76,18 +76,29 @@ app.post("/", async (req, res) => {
     const {rows: hotel } = await pool.query(
       `SELECT * FROM hotel`
     );
-    for(let i = 0; i < data.hotel.length; i++){
-      const {rows: room_type }= await pool.query(
-        `SELECT * FROM room_type WHERE hotel_id = hotel[i].hotel_id`
+    
+
+    let id;
+    let price_array = [];
+    for(let i = 0; i < hotel.length; i++){
+      id = hotel[i].hotel_id;
+      console.log(id);
+      const {rows: [price] }= await pool.query(
+        `SELECT price FROM room_type WHERE hotel_id = '${id}'`
       );
-        
+      price_array.push(price);
     }
-      if(hotel && room_type){
-        res.send({hotel:hotel,room:room_type, status: "200"})
+    console.log(price_array);
+      if(hotel && price_array){
+        res.send({hotel:hotel,prices: price_array, status: "200"})
       }
   } catch (err) {
     console.log(err);
   }
+});
+
+app.post("/register", async (req,res) => {
+  console.log(req.body);
 });
 
 
