@@ -43,6 +43,33 @@ app.get("/form", async (req, res) => {
 app.get("/bookme", async (req, res) => {
   res.render("bookme");
 });
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const { rows: user } = await pool.query(
+      `SELECT * FROM customer WHERE username = ${username}`
+    );
+    if (user[0]) {
+      const passwordValid = await bcrypt.compare(password, user[0].password);
+      if (passwordValid) {
+        const token = jwt.sign(
+          { id: user[0].customer_id, username: user[0].username },
+          process.env.JWT_SECRET,
+          { expiresIn: "1h" }
+        );
+        res.cookie("HBO", token, {
+          sameSite: "None",
+          secure: true,
+          httpOnly: true,
+        });
+        res.locals.username = user[0].username;
+        res.send({ path: "/", status: "200" });
+      }
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 app.listen(port, () => {
   console.log(`Listening on port ${port} at http://localhost:${port}`);
 });
