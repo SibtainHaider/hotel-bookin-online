@@ -45,6 +45,7 @@
 .heading{
     font-size: 3rem;
     text-align: center;
+    /* margin-top: 3rem; */
 }
 
 .form-label{
@@ -92,7 +93,7 @@
 .submit-btn{
     margin-top: 1.6rem;
     width: 41.6rem;
-    margin-left: 10rem;
+    /* margin-left: 10rem; */
     background-color: #4CAF50;
     height: 3.6rem;
     cursor: pointer;
@@ -108,24 +109,37 @@
 
 .register {
 	/* text-align: center; */
-	margin-top: 10px;
-    margin-left: 10rem;
+	/* margin-top: 10px; */
+    /* margin-left: 10rem; */
     justify-content: center;
+    align-items: center;
     width: 41.6rem;
     display: flex;
+    margin-top: 2rem;
+    width: 100%;
+    /* flex-wrap: wrap; */
 }
 
 .register p {
-	margin-bottom: 5px;
+	/* margin-bottom: 5px; */
     margin-right: .5rem;
+    /* justify-content: left; */
 	color: #555;
 }
 
 .register a {
 	color: #4CAF50;
+    /* margin-top: 10rem; */
 	text-decoration: none;
 }
 
 .register a:hover {
 	text-decoration: underline;
+}
+
+.booking-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

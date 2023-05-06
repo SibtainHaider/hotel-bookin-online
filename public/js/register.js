@@ -30,5 +30,10 @@ register_form.addEventListener("submit", async (event) => {
       }),
     });
     const data = await result.json();
+    if(data.status === "200")
+    {
+      alert("registered Successfully")
+      window.location.href = "/login"
+    }
 
   });

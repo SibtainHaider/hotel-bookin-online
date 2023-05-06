@@ -6,23 +6,26 @@
     <link rel="stylesheet" href="nav.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="form.css">
+    <script defer="" src="form.js"></script>
+
 </head>
 <body>
   <nav class="nav-flex">
-      <a class="brand-name" href="index.html">HBO</a>
+      <a class="brand-name" href="/">HBO</a>
       
         <div class="links">
-          <a class="links-decor" href="index.html">Home</a></li>
+          <a class="links-decor" href="/">Home</a></li>
           <a class="links-decor" href="#">About</a></li>
           <a class="links-decor"href="#">Hotels</a>
           <a class="links-decor" href="#">Contact</a>
-          <a class="links-decor" href="login.html">Login</a>
+          <a class="links-decor" href="/register">Sign Up</a>
+          <a class="links-decor" href="/login">Login</a>
         </div>
       
   </nav>
   <section class="book-page">
         <div class="booking-box">
-          <div>
+          <div class="booking-container">
            <div>
             <h2 class="heading">Booking</h2>
           </div>
@@ -51,36 +54,36 @@
 
             <div class="location">
               <label class="form-label">Location:</label>
-                <select class="form-input">
+                <select class="form-input location__select">
                   <option class="room-option" value="">---Select Option---</option>
-                  <option class="room-option" value="">Karachi</option>
-                  <option class="room-option" value="">Islamabad</option>
-                  <option class="room-option" value="">Peshawar</option>
-                  <option class="room-option" value="">Lahore</option>
-                  <option class="room-option" value="">Quetta</option>
+                  <option class="room-option" value="karachi">Karachi</option>
+                  <option class="room-option" value="islamabad">Islamabad</option>
+                  <option class="room-option" value="peshawar">Peshawar</option>
+                  <option class="room-option" value="lahore">Lahore</option>
+                  <option class="room-option" value="quetta">Quetta</option>
                 </select>           
             </div>
 
             <div class="hotel-name">
               <label class="form-label">Hotel Name:</label>
-                <select class="form-input">
+                <select class="form-input h-name">
                   <option class="room-option" value="">---Select Option---</option>
-                  <option class="room-option" value="">Pearl Continental Hotel</option>
-                  <option class="room-option" value="">Regent Plaza </option>
-                  <option class="room-option" value="">Serena Hotel</option>
-                  <option class="room-option" value="">Lahore</option>
-                  <option class="room-option" value="">Quetta</option>
+                  <option class="room-option" value="pc">Pearl Continental Hotel</option>
+                  <option class="room-option" value="rp">Regent Plaza </option>
+                  <option class="room-option" value="sh">Serena Hotel</option>
+                  <option class="room-option" value="l">Lahore</option>
+                  <option class="room-option" value="q">Quetta</option>
                 </select>           
             </div>
 
 
             <div class="room-type">
               <label class="form-label">Room Type:</label>
-                <select class="form-input">
+                <select class="form-input r-type" >
                   <option class="room-option" value="">---Select Option---</option>
-                  <option class="room-option" value="">Executive Room</option>
-                  <option class="room-option" value="">Prime Room</option>
-                  <option class="room-option" value="">Deluxe Room</option>
+                  <option class="room-option" value="er">Executive Room</option>
+                  <option class="room-option" value="pr">Prime Room</option>
+                  <option class="room-option" value="dr">Deluxe Room</option>
                 </select>           
             </div>
 
@@ -98,24 +101,22 @@
               <label class="form-label" class="label-heading">Check-Out Date:</label>
               <input class="form-input cout-date" type="date" >
               </div>
-          </form>   
-
-          <input class="login" type="submit" value="Login">
-          <input class="submit-btn" type="submit" value="Submit">
-          
-
-          <div class="register">
-            <p>Don't have an account?</p>
-            <a href="register.html">Register</a>
-          </div>
+              <input class="submit-btn" type="submit" value="Submit">
+                 
+            </form>   
+            
+            <div class="register">
+              <p>Don't have an account?</p>
+              <a href="register.html">Register</a>
+            </div>
         </div>
 
         <div class="form-img">
           <div class="absolute-text">
-            <h1>Come Live With Us</h1>
+            <h1>Come Live With Us and Enjoy</h1>
             
           </div>
-          <img src="/images/andy-crone-yl4BeDe5x0c-unsplash.jpg" alt="">
+          <img src="andy-crone-yl4BeDe5x0c-unsplash.jpg" alt="">
         </div>
         </div>
 
