@@ -5,10 +5,10 @@ register_form.addEventListener("submit", async (event) => {
     const firstname = register_form.querySelector(".firstname").value;
     const lastname = register_form.querySelector(".lastname").value;
     const email = register_form.querySelector(".email").value;
-    const username = register_form.querySelector(".username").value;
-    const password = register_form.querySelector(".password").value;
-    const confirm_password = register_form.querySelector(".confirm-password").value;
-    console.log(firstname, lastname, username);
+    const username = register_form.querySelector("#username").value;
+    const password = register_form.querySelector("#password").value;
+    const confirm_password = register_form.querySelector("#confirm-password").value;
+    console.log(firstname, lastname, username, email, password, confirm_password);
     const result = await fetch("/register", {
       method: "POST",
       headers: {
@@ -24,7 +24,5 @@ register_form.addEventListener("submit", async (event) => {
       }),
     });
     const data = await result.json();
-    if (data.status === "200") {
-      window.location.href = data.path;
-    }
+    
   });

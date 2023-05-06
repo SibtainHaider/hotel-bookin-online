@@ -82,13 +82,11 @@ app.post("/", async (req, res) => {
     let price_array = [];
     for(let i = 0; i < hotel.length; i++){
       id = hotel[i].hotel_id;
-      console.log(id);
       const {rows: [price] }= await pool.query(
         `SELECT price FROM room_type WHERE hotel_id = '${id}'`
       );
       price_array.push(price);
     }
-    console.log(price_array);
       if(hotel && price_array){
         res.send({hotel:hotel,prices: price_array, status: "200"})
       }
@@ -98,7 +96,23 @@ app.post("/", async (req, res) => {
 });
 
 app.post("/register", async (req,res) => {
-  console.log(req.body);
+  if (req.body.password == req.body.confirm_password) {
+    data = [req.body.firstname,
+    req.body.lastname,
+    req.body.email,
+    req.body.username,
+    req.body.password
+  ]
+  console.log(data);
+    await pool.query(
+      `INSERT INTO customer (f_name,l_name,email,username,password) VALUES ($1,$2,$3,$4,$5)`,
+      data
+    );
+    return res.json({message:"registered successfully"});
+  }
+  else {
+    return res.json({message:"not registered"});
+  }
 });
 
 
