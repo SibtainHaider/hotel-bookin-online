@@ -110,13 +110,10 @@
             <% if (locals.username) { %>
             <input class="submit-btn" type="submit" value="Submit" />
             <% } else { %>
-            <p style="color: 'red'">Not Signed In</p>
-            <input
-              class="submit-btn disabled"
-              type="submit"
-              value="Submit"
-              disabled="true"
-            />
+             <div>
+              <p style="color: 'red'">Not Signed In</p>
+            <input class="submit-btn disabled" type="submit" value="Submit" disabled="true" />
+             </div>
             <% } %>
           </form>
         </div>

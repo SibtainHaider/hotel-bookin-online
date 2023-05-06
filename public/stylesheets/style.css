@@ -115,7 +115,7 @@
 .book-now{
   height: 3.6rem;
   width: 14rem;
-  margin-top: 1.6rem;
+  margin-top: 3.4rem;
   background-color: #4CAF50;
   border: 1px solid #70707069;
   border-radius: 5px;
@@ -124,7 +124,7 @@
   justify-content: center;
   gap: 5px;
   color: white;
-  margin-left: 85%;
+  margin-left: 3.4rem;
   
 }
 .book-now:hover{
