@@ -97,21 +97,24 @@ app.post("/", async (req, res) => {
 
 app.post("/register", async (req,res) => {
   if (req.body.password == req.body.confirm_password) {
+    const hashedPassword = await bcrypt.hash(req.body.password,10)
     data = [req.body.firstname,
     req.body.lastname,
     req.body.email,
     req.body.username,
-    req.body.password
-  ]
-  console.log(data);
-    await pool.query(
-      `INSERT INTO customer (f_name,l_name,email,username,password) VALUES ($1,$2,$3,$4,$5)`,
-      data
-    );
-    return res.json({message:"registered successfully"});
-  }
-  else {
-    return res.json({message:"not registered"});
+    hashedPassword
+    ]
+    console.log(data);
+    try {
+      await pool.query(
+        `INSERT INTO customer (f_name,l_name,email,username,password) VALUES ($1,$2,$3,$4,$5)`,
+        data
+      );
+      return res.json({message:"registered successfully"});
+    } catch(err) {
+      console.log(err)
+      return res.json({message:"not registered"});
+    }
   }
 });
 
