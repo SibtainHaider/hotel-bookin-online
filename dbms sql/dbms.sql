@@ -119,3 +119,7 @@ VALUES
 INSERT INTO customer (f_name,l_name,email,phone,username,password)
 VALUES 
 	('Sibtain','Haider','sibtain.moon@gmail.com','03128816802','sibbi','$2a$10$4S2.JjY.jP/KVmi48mIo7uAHtbBN/nJlH9Zm9HduGVcUZEE66ASSaa');
+
+
+
+alter table bookings add column phone_no varchar(15)

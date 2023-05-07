@@ -144,3 +144,9 @@
   align-items: center;
   justify-content: center;
 }
+
+
+.not_signed{
+  font-size: 1.6rem;
+  color: red;
+}

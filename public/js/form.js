@@ -34,6 +34,18 @@ const booking_data = async (event) => {
     const cout = booking_forms.querySelector(".cout-date").value;
     const hotel_id = id;
 
+    // console.log(firstname,
+    //   lastname,
+    //   email,
+    //   phone,
+    //   location,
+    //   hotelname,
+    //   roomtype,
+    //   no_person,
+    //   cin,
+    //   cout,
+    //   hotel_id);
+
     const result = await fetch("/form", {
       method: "POST",
       headers: {

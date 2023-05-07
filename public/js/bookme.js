@@ -14,26 +14,27 @@ const booking_data = async (event) => {
   const data = await result.json();
   if (data.status === "200") {
     newhtml = "";
-    for (let i = 0; i < data.hotel.length; i++) {
+    // console.log(data.room_details[0]);
+    for (let i = 0; i < data.room_details.length; i++) {
       newhtml =
         newhtml +
         `<div class="card-container">
         <form class="hotel_book">
         <div class="card">
           <div class="card__heading">
-              <h2 class="hotel-name">${data.hotel[i].hotel_name}</h2>
+              <h2 class="hotel-name">${data.room_details[i].hotel_name}</h2>
           </div>
           <div class="front">
               <div>
                   <img src="roberto-nickson-emqnSQwQQDo-unsplash.jpg" alt="Product Image">
               </div>
               <div class="hotel-desc">
-                  <h3>Price: 43</h3> 
+                  <h3>Price: ${data.room_details[i].price}</h3> 
                   <h3>Stars: 234</h3>
-                  <h3>Room Type: Executive</h3>
+                  <h3>Room Type: ${data.room_details[i].room_type}</h3>
               </div>
               <div>
-                  <input class="submit-btn" type="submit" value="Book Now" data-id=${data.hotel[i].hotel_id}>
+                  <input class="submit-btn" type="submit" value="Book Now" data-id=${data.room_details[i].hotel_id}>
               </div>
           </div>
         </div>

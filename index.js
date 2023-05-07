@@ -116,11 +116,11 @@ app.post("/search", authenticate, async (req, res) => {
 app.post("/bookme", authenticate, async (req, res) => {
   const { location } = req.body;
   try {
-    const { rows: hotel } = await pool.query(
-      `SELECT * FROM hotel WHERE city = '${location}'`
-    );
+    const { rows:room_details} = await pool.query(
+      `SELECT * FROM hotel FULL JOIN room_type ON hotel.hotel_id=room_type.hotel_id WHERE hotel.hotel_id=room_type.hotel_id AND hotel.city='${location}'`
+      );
     res.send({
-      hotel: hotel,
+      room_details,
       status: "200",
     });
   } catch (err) {
@@ -187,32 +187,20 @@ app.post("/register", authenticate, async (req, res) => {
 });
 
 app.post("/form", authenticate, async (req, res) => {
-  // data = [
-  //   req.body.firstname,
-  //   req.body.lastname,
-  //   req.body.email,
-  //   req.body.phone,
-  //   req.body.location,
-  //   req.body.hotelname,
-  //   req.body.roomtype,
-  //   req.body.no_person,
-  //   req.body.cin,
-  //   req.body.cout
-  // ]
-  // console.log(req.body);
   try {
     const { rows: customer_id } = await pool.query(
       `SELECT customer_id from customer WHERE username='${res.locals.username}'`
     );
 
     await pool.query(
-      `INSERT INTO bookings (customer_id, hotel_id, no_person, cin_date, cout_date) VALUES ($1,$2,$3,$4,$5)`,
+      `INSERT INTO bookings (customer_id, hotel_id, no_person, cin_date, cout_date, phone_no) VALUES ($1,$2,$3,$4,$5,$6)`,
       [
         customer_id[0].customer_id,
         req.body.hotel_id,
         req.body.no_person,
         req.body.cin,
         req.body.cout,
+        req.body.phone,
       ]
     );
 
