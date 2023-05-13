@@ -33,7 +33,10 @@ const booking_data = async (event) => {
     const cin = booking_forms.querySelector(".cin-date").value;
     const cout = booking_forms.querySelector(".cout-date").value;
     const hotel_id = id;
-
+    let room_type;
+    if(roomtype === 'er') room_type = 2;
+    else if (roomtype === 'pr') room_type = 1;
+    else if (roomtype === 'dr') room_type = 0;
     // console.log(firstname,
     //   lastname,
     //   email,
@@ -65,10 +68,20 @@ const booking_data = async (event) => {
         hotel_id,
       }),
     });
+    
     const data = await result.json();
     if (data.status === "200") {
-      alert("Booking Successful");
-      window.location.href = "/";
+      const result = await fetch("/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          room_type: room_type,
+        }),
+      });
+      const url = await result.json();
+      window.location.href = url.path;
     }
   });
 };

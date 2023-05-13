@@ -1,3 +1,11 @@
+if(window.location.href === 'http://localhost:8800/success')
+{
+  document.querySelector('.success-div').classList.add('display');
+}
+if(window.location.href === 'http://localhost:8800/failure')
+{
+  document.querySelector('.failure-div').classList.add('display');
+}
 const total_data = async (event) => {
   const result = await fetch("/", {
     method: "POST",
@@ -13,10 +21,10 @@ const total_data = async (event) => {
       locationHTML +
       `<option value="${data.location[i].city}">${data.location[i].city}</option>`;
   }
+  
   document.querySelector(".location").innerHTML = locationHTML;
-
   newHTML = "";
-  for (let i = 0; i < data.hotel.length; i++) {
+  for (let i = 0; i < 6; i++) {
     newHTML =
       newHTML +
       `<div class="card-container">
@@ -24,26 +32,35 @@ const total_data = async (event) => {
           <div class="front">
             <img src="/roberto-nickson-emqnSQwQQDo-unsplash.jpg" alt="Product Image">
             <h2 class="hotel-name">${data.hotel[i].hotel_name}</h2>
+            <p>${data.hotel[i].city}, ${data.hotel[i].country}</p>
           </div>
           <div class="back">
-            <p>Description:</p>
+            <div class="rating" id="rating-container">
+              <ion-icon class="star" name="star"></ion-icon>
+              <ion-icon class="star" name="star"></ion-icon>
+              <ion-icon class="star" name="star"></ion-icon>
+              <ion-icon class="star" name="star"></ion-icon>
+              <ion-icon class="star" name="star"></ion-icon>
+            </div>
             <ul>
-              <li><a href="form.html" class="card-link" data-id=${
-                data.hotel[i].hotel_id
-              }>Executive Room: Rs${1234}.</a></li>
-              <li><a href="form.html" class="card-link" data-id=${
-                data.hotel[i].hotel_id
-              }>Prime Room</a></li>
-              <li><a href="/form" class="card-link" data-id=${
-                data.hotel[i].hotel_id
-              }>Deluxe Room</a></li>
+              <li><a href="form.html" class="card-link" data-id=${data.hotel[i].hotel_id}>Executive Room: <span>Rs ${data.prices[i][0].price}</span></a></li>
+              <li><a href="form.html" class="card-link" data-id=${data.hotel[i].hotel_id}>Prime Room: <span>Rs ${data.prices[i][1].price}</span></a></li>
+              <li><a href="/form" class="card-link" data-id=${data.hotel[i].hotel_id}>Deluxe Room: <span>Rs ${data.prices[i][2].price}</span></a></li>
             </ul>
           </div>
         </div>
       </div>`;
   }
   document.querySelector(".cards-section").innerHTML = newHTML;
-  //console.log(data.hotel)
+  const stars = document.querySelectorAll(".rating");
+  for(let i=0; i<6; i++)
+  {
+      const star = stars[i].querySelectorAll(".star")
+      for(let z = 0; z<data.hotel[i].rating_stars; z++)
+      {
+        star[z].classList.add("filled");
+      }
+  }
   document.querySelectorAll(".card-link").forEach((item) => {
     item.addEventListener("click", async (event) => {
       event.preventDefault();
@@ -55,7 +72,13 @@ const total_data = async (event) => {
   search.addEventListener("submit", async (event) => {
     event.preventDefault();
     const location = search.querySelector(".location").value;
+    let room = search.querySelector(".room").value;
+    console.log(room)
     console.log(location);
+    if(room === '')
+    {
+      room = 'ANY'
+    }
     const result = await fetch("/search", {
       method: "POST",
       headers: {
@@ -63,6 +86,7 @@ const total_data = async (event) => {
       },
       body: JSON.stringify({
         location,
+        room,
       }),
     });
     const data = await result.json();

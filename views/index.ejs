@@ -6,11 +6,19 @@
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/nav.css" />
     <link rel="stylesheet" href="/indexcard.css" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </head>
   <body>
     <%- include("nav.ejs") %>
 
     <main>
+      <div class="success-div">
+        <h3>Payment Successfully Processed!</h3>
+      </div>
+      <div class="failure-div">
+        <h3>Payment Failed! Please try again later.</h3>
+      </div>
       <div class="main-img">
         <div class="absolute-text">
           <h1>Enjoy Your <br />Dream Vacation</h1>
@@ -40,11 +48,11 @@
 
             <div>
               <label class="label-heading" for="">Room type</label>
-              <select name="">
+              <select name="" class="room">
                 <option value="">--- Select Option ---</option>
-                <option value="">Executive Room</option>
-                <option value="">Prime Room</option>
-                <option value="">Deluxe Room</option>
+                <option value="EXECUTIVE">Executive Room</option>
+                <option value="PRIME">Prime Room</option>
+                <option value="DELUXE">Deluxe Room</option>
               </select>
             </div>
             <div>
@@ -248,6 +256,8 @@
           </div>
         </div>
       </section>
+      
+      
     </main>
 
     <footer>

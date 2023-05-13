@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
-// const stripe = require("stripe")(`${process.env.STRIPE}`);
+const stripe = require("stripe")(`${process.env.STRIPE}`);
 // const gClient = new OAuth2Client(`${process.env.GOOGLE_CLIENTID}`);
 const { Pool } = require("pg");
 const util = require("util");
@@ -56,7 +56,7 @@ app.get("/register", authenticate, async (req, res) => {
 app.get("/form:id", authenticate, async (req, res) => {
   res.render("form");
 });
-app.get("/bookme:location", authenticate, async (req, res) => {
+app.get("/bookme:location:room", authenticate, async (req, res) => {
   res.render("bookme");
 });
 app.post("/booking", authenticate, async (req, res) => {
@@ -75,17 +75,18 @@ app.post("/booking", authenticate, async (req, res) => {
 });
 app.post("/", authenticate, async (req, res) => {
   try {
-    const { rows: hotel } = await pool.query(`SELECT * FROM hotel`);
-    const { rows: hotel_location } = await pool.query(
-      `SELECT DISTINCT city FROM hotel`
+    const { rows: hotel } = await pool.query(
+      `SELECT * FROM hotel ORDER BY rating_stars DESC`
     );
+    const { rows: hotel_location } = await pool.query(
+      `SELECT DISTINCT city FROM hotel `
+    );
+    // console.log(hotel)
     let id;
     let price_array = [];
     for (let i = 0; i < hotel.length; i++) {
       id = hotel[i].hotel_id;
-      const {
-        rows: [price],
-      } = await pool.query(
+      const { rows: price } = await pool.query(
         `SELECT price FROM room_type WHERE hotel_id = '${id}'`
       );
       price_array.push(price);
@@ -104,9 +105,10 @@ app.post("/", authenticate, async (req, res) => {
 });
 app.post("/search", authenticate, async (req, res) => {
   const { location } = req.body;
+  const {room} = req.body;
   try {
     res.send({
-      path: `/bookme:${location}`,
+      path: `/bookme:${location}:${room}`,
       status: "200",
     });
   } catch (err) {
@@ -115,14 +117,32 @@ app.post("/search", authenticate, async (req, res) => {
 });
 app.post("/bookme", authenticate, async (req, res) => {
   const { location } = req.body;
+  const { room } = req.body;
+  // console.log(room)
   try {
-    const { rows:room_details} = await pool.query(
-      `SELECT * FROM hotel FULL JOIN room_type ON hotel.hotel_id=room_type.hotel_id WHERE hotel.hotel_id=room_type.hotel_id AND hotel.city='${location}'`
+    if(room !== 'ANY')
+    {
+      const { rows: room_details } = await pool.query(
+        `SELECT * FROM hotel, room_type WHERE hotel.hotel_id=room_type.hotel_id AND hotel.city='${location}' AND room_type.room_type='${room} ROOM' ORDER BY rating_stars DESC`
       );
-    res.send({
-      room_details,
-      status: "200",
-    });
+      // console.log(room_details)
+      res.send({
+        room_details,
+        status: "200",
+      });
+    }
+    else
+    {
+      const { rows: room_details } = await pool.query(
+        `SELECT * FROM hotel FULL JOIN room_type ON hotel.hotel_id=room_type.hotel_id WHERE hotel.hotel_id=room_type.hotel_id AND hotel.city='${location}' ORDER BY rating_stars DESC`
+      );
+      // console.log(room_details)
+      res.send({
+        room_details,
+        status: "200",
+      });
+    }
+    
   } catch (err) {
     console.log(err);
   }
@@ -160,6 +180,7 @@ app.post("/logout", authenticate, async (req, res) => {
     res.send({ path: "/" });
   }
 });
+
 app.post("/register", authenticate, async (req, res) => {
   if (req.body.password == req.body.confirm_password) {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -211,7 +232,37 @@ app.post("/form", authenticate, async (req, res) => {
     console.log(err);
   }
 });
+app.post("/payment", authenticate, async (req, res) => {
+  try {
 
+    const { room_type } = req.body;
+    const price = [
+      "price_1N7M0DLu45q80UD47qBMYgNH",
+      "price_1N7LzjLu45q80UD4BLlo8iwL",
+      "price_1N7LzELu45q80UD45YzbhBm6",
+    ];
+  
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          price: price[room_type],
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      success_url: `http://localhost:8800/success`,
+    });
+    res.send({ path: session.url });
+  } catch (err) {
+    res.send({path:'http://localhost:8800/failure'})
+  }
+});
+app.get("/success", authenticate, async (req, res) => {
+  res.render("index");
+});
+app.get("/failure", authenticate, async (req, res) => {
+  res.render("index");
+});
 app.listen(port, () => {
   console.log(`Listening on port ${port} at http://localhost:${port}`);
 });

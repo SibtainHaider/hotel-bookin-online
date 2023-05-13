@@ -76,3 +76,10 @@
 .front input[type="submit"]:hover {
 	background-color: #3e8e41;
 }
+
+.city-country {
+    color: black !important;
+    margin-left:1.5rem !important;
+    text-align: left !important;
+    font-size: 2rem;
+}
