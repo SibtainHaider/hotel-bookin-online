@@ -19,12 +19,12 @@ $$ LANGUAGE plpgsql VOLATILE;
 
 create table hotel(
 	hotel_id varchar(15) primary key not null default generate_uid(15),
-	hotel_name varchar(25),
+	hotel_name varchar(30),
 	country varchar(25),
 	city varchar(25),
 	postal_code int,
 	street varchar(25),
-  rating_stars int
+  	rating_stars int
 );
 
 
@@ -33,7 +33,6 @@ create table customer(
 	f_name varchar(15),
 	l_name varchar(15),
 	email varchar(50) unique,
-	phone varchar(15),
 	username varchar(15) unique,
 	password varchar(255)
 );
@@ -64,7 +63,7 @@ create table bookings(
 	no_person int,
 	cin_date date,
 	cout_date date,
-  phone_no varchar(15),
+  	phone_no varchar(15),
 	constraint fk_hid foreign key(hotel_id) references hotel(hotel_id) on delete set null,
 	constraint fk_cid foreign key(customer_id) references customer(customer_id) on delete set null
 );
@@ -89,28 +88,23 @@ EXECUTE FUNCTION insert_dummy_rooms();
 
 
 
-INSERT INTO hotel (hotel_name, country, city, postal_code, street)
-VALUES
-   ('Serena Hotel', 'Pakistan', 'Islamabad', 44000, 'Khayaban-e-Suhrawardy'),
-   ('Pearl Continental Hotel', 'Pakistan', 'Lahore', 54000, 'Shahrah-e-Quaid-e-Azam'),
-   ('Movenpick Hotel', 'Pakistan', 'Karachi', 75600, 'Club Road'),
-   ('Ramada Plaza Hotel', 'Pakistan', 'Rawalpindi', 46000, 'The Mall'),
-   ('PC Hotel', 'Pakistan', 'Gwadar', 91000, 'Gwadar West Bay'),
-   ('Avari Hotel', 'Pakistan', 'Lahore', 54000, 'Mall Road'),
-   ('Prince Hotel', 'Pakistan', 'Islamabad', 44000, 'Aga Khan Road'),
-   ('Pearl Continental Hotel', 'Pakistan', 'Rawalpindi', 46000, 'The Mall'),
-   ('Marriott Hotel', 'Pakistan', 'Islamabad', 44000, 'Aga Khan Road'),
-   ('Ramada Hotel', 'Pakistan', 'Islamabad', 44000, 'Club Road'),
-   ('Pearl Continental Hotel', 'Pakistan', 'Faisalabad', 38000, 'Lytton Road'),
-   ('Serena Hotel', 'Pakistan', 'Faisalabad', 38000, 'Club Road'),
-   ('Continental Hotel', 'Pakistan', 'Lahore', 54000, 'Shadman'),
-   ('Avari Towers', 'Pakistan', 'Karachi', 75530, 'Fatima Jinnah Road'),
-   ('Ramada Hotel', 'Pakistan', 'Multan', 60000, 'Abdali Road'),
-   ('Heritage Luxury Suites', 'Pakistan', 'Islamabad', 44000, 'Kaghan Road'),
-   ('Hotel Crown Plaza', 'Pakistan', 'Rawalpindi', 46000, 'Adamjee Road'),
-   ('Hotel One', 'Pakistan', 'Islamabad', 44000, 'IJP Road'),
-   ('Hotel Grand Ambassador', 'Pakistan', 'Islamabad', 44000, 'Club Road'),
-   ('Mehran Hotel', 'Pakistan', 'Hyderabad', 71000, 'Liaquat Road');
+INSERT INTO hotel (hotel_name, country, city, postal_code, street,rating_stars)
+values
+	('Avari Hotel LHR', 'Pakistan', 'Lahore', 54000, 'Mall Road',4),
+    ('Prince Hotel ISL', 'Pakistan', 'Islamabad', 44000, 'Aga Khan Road',5),
+    ('Pearl Continental Hotel RWP', 'Pakistan', 'Rawalpindi', 46000, 'The Mall',4),
+    ('Marriott Hotel ISL', 'Pakistan', 'Islamabad', 44000, 'Aga Khan Road',4),
+    ('Ramada Hotel ISL', 'Pakistan', 'Islamabad', 44000, 'Club Road',5),
+    ('Pearl Continental Hotel FSL', 'Pakistan', 'Faisalabad', 38000, 'Lytton Road',5),
+    ('Serena Hotel FSL', 'Pakistan', 'Faisalabad', 38000, 'Club Road',4),
+    ('Continental Hotel LHR', 'Pakistan', 'Lahore', 54000, 'Shadman',4),
+    ('Avari Towers KHI', 'Pakistan', 'Karachi', 75530, 'Fatima Jinnah Road',3),
+    ('Ramada Hotel MLT', 'Pakistan', 'Multan', 60000, 'Abdali Road',5),
+    ('Heritage Luxury Suites ISL', 'Pakistan', 'Islamabad', 44000, 'Kaghan Road',5),
+    ('Hotel Crown Plaza RWP', 'Pakistan', 'Rawalpindi', 46000, 'Adamjee Road',4),
+    ('Hotel One ISL', 'Pakistan', 'Islamabad', 44000, 'IJP Road',3),
+    ('Hotel Grand Ambassador ISL', 'Pakistan', 'Islamabad', 44000, 'Club Road',4),
+    ('Mehran Hotel HYD', 'Pakistan', 'Hyderabad', 71000, 'Liaquat Road',3);
 
 
 
@@ -118,8 +112,7 @@ VALUES
 
 
 
-INSERT INTO customer (f_name,l_name,email,phone,username,password)
+INSERT INTO customer (f_name,l_name,email,username,password)
 VALUES 
-	('Sibtain','Haider','sibtain.moon@gmail.com','03128816802','sibbi','$2a$10$4S2.JjY.jP/KVmi48mIo7uAHtbBN/nJlH9Zm9HduGVcUZEE66ASSaa');
-
+	('Sibtain','Haider','sibtain.moon@gmail.com','sibbi','$2a$10$4S2.JjY.jP/KVmi48mIo7uAHtbBN/nJlH9Zm9HduGVcUZEE66ASSaa');
 
