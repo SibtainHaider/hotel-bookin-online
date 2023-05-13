@@ -23,7 +23,8 @@ create table hotel(
 	country varchar(25),
 	city varchar(25),
 	postal_code int,
-	street varchar(25)
+	street varchar(25),
+  rating_stars int
 );
 
 
@@ -63,6 +64,7 @@ create table bookings(
 	no_person int,
 	cin_date date,
 	cout_date date,
+  phone_no varchar(15),
 	constraint fk_hid foreign key(hotel_id) references hotel(hotel_id) on delete set null,
 	constraint fk_cid foreign key(customer_id) references customer(customer_id) on delete set null
 );
@@ -121,5 +123,3 @@ VALUES
 	('Sibtain','Haider','sibtain.moon@gmail.com','03128816802','sibbi','$2a$10$4S2.JjY.jP/KVmi48mIo7uAHtbBN/nJlH9Zm9HduGVcUZEE66ASSaa');
 
 
-
-alter table bookings add column phone_no varchar(15)
