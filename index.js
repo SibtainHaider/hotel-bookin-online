@@ -68,7 +68,10 @@ app.post("/booking", authenticate, async (req, res) => {
     const { rows: hotel_detail } = await pool.query(
       `SELECT * FROM hotel WHERE hotel_id = '${id}'`
     );
-    res.send({ status: "200", user: user_detail[0], hotel: hotel_detail[0] });
+    const {rows : room_details} = await pool.query(
+      `SELECT * FROM room_type WHERE hotel_id = '${id}'`
+    )
+    res.send({ status: "200", user: user_detail[0], hotel: hotel_detail[0], room: room_details[0] });
   } else {
     res.send({ status: "300" });
   }

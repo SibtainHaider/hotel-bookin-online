@@ -19,6 +19,7 @@ const booking_data = async (event) => {
     booking_forms.querySelector(".email").value = data.user.email;
     booking_forms.querySelector(".location__select").value = data.hotel.city;
     booking_forms.querySelector(".h-name").value = data.hotel.hotel_name;
+    booking_forms.querySelector("r-type").value = data.room_type.room_type;
   }
   booking_forms.addEventListener("submit", async (event) => {
     event.preventDefault();
