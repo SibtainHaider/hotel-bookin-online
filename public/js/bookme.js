@@ -52,7 +52,8 @@ const booking_data = async (event) => {
     item.addEventListener("submit", async (event) => {
       event.preventDefault();
       const hotel_id = event.target.querySelector(".submit-btn").dataset.id;
-      window.location.href = `/form:${hotel_id}`;
+      room = window.location.href.split(":")[4];
+      window.location.href = `/form:${hotel_id}:${room}`;
     });
   });
 };

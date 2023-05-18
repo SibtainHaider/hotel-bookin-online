@@ -53,14 +53,14 @@ app.get("/login", authenticate, async (req, res) => {
 app.get("/register", authenticate, async (req, res) => {
   res.render("register");
 });
-app.get("/form:id", authenticate, async (req, res) => {
+app.get("/form:id:room", authenticate, async (req, res) => {
   res.render("form");
 });
 app.get("/bookme:location:room", authenticate, async (req, res) => {
   res.render("bookme");
 });
 app.post("/booking", authenticate, async (req, res) => {
-  const { id } = req.body;
+  const { id,room } = req.body;
   if (res.locals.username) {
     const { rows: user_detail } = await pool.query(
       `SELECT * FROM customer WHERE username = '${res.locals.username}'`
@@ -68,9 +68,11 @@ app.post("/booking", authenticate, async (req, res) => {
     const { rows: hotel_detail } = await pool.query(
       `SELECT * FROM hotel WHERE hotel_id = '${id}'`
     );
+    console.log(room)
     const {rows : room_details} = await pool.query(
-      `SELECT * FROM room_type WHERE hotel_id = '${id}'`
+      `SELECT * FROM room_type WHERE room_type = '${room} ROOM' and hotel_id = '${id}'`
     )
+    console.log(room_details);
     res.send({ status: "200", user: user_detail[0], hotel: hotel_detail[0], room: room_details[0] });
   } else {
     res.send({ status: "300" });
@@ -257,6 +259,7 @@ app.post("/payment", authenticate, async (req, res) => {
     });
     res.send({ path: session.url });
   } catch (err) {
+    console.log(err)
     res.send({path:'http://localhost:8800/failure'})
   }
 });
@@ -265,6 +268,25 @@ app.get("/success", authenticate, async (req, res) => {
 });
 app.get("/failure", authenticate, async (req, res) => {
   res.render("index");
+});
+app.get("/reviews", authenticate, async (req, res) => {
+  res.render("review");
+});
+
+app.post("/reviews", authenticate, async (req, res) => {
+  
+  try {
+      const { rows: reviews } = await pool.query(
+        `SELECT * FROM review`
+      );
+    res.send({data:reviews})
+  } catch (err) {
+    console.log(err);
+  }
+});
+app.post("/PostReviews", authenticate, async (req, res) => {
+  
+  res.send({path: "/reviews"})
 });
 app.listen(port, () => {
   console.log(`Listening on port ${port} at http://localhost:${port}`);
