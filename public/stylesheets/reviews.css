@@ -134,3 +134,9 @@ body {
 .ratings > input:hover ~ label:before {
   transform: scale(1.2);
 }
+
+
+.review-text{
+  width: 50%;
+  height: 8rem;
+}

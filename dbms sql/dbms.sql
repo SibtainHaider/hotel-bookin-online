@@ -108,11 +108,14 @@ values
 
 
 
-
-
-
-
 INSERT INTO customer (f_name,l_name,email,username,password)
 VALUES 
 	('Sibtain','Haider','sibtain.moon@gmail.com','sibbi','$2a$10$4S2.JjY.jP/KVmi48mIo7uAHtbBN/nJlH9Zm9HduGVcUZEE66ASSaa');
 
+
+insert into review (customer_id,review_comment, rating)
+values 
+	(qpbz9j0cS4d4Pwu,'One of the best hotels available at a very reasonable price',4),
+	(CqUuT531GEWPMxT,'Very happy to find all hotel options under one roof',5),
+	(ro6CNLBssTSUSwp,'Very good services',4);
+`
