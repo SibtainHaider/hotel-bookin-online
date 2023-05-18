@@ -140,3 +140,8 @@ body {
   width: 50%;
   height: 8rem;
 }
+
+.disabled {
+  background-color: #555 !important;
+  cursor:not-allowed !important;
+}

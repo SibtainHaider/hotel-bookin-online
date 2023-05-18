@@ -16,7 +16,6 @@ const booking_data = async (event) => {
   });
   const data = await result.json();
   if (data.status === "200") {
-    console.log(data.room);
     booking_forms.querySelector(".firstname").value = data.user.f_name;
     booking_forms.querySelector(".lastname").value = data.user.l_name;
     booking_forms.querySelector(".email").value = data.user.email;
@@ -36,6 +35,9 @@ const booking_data = async (event) => {
     const no_person = booking_forms.querySelector(".no-person").value;
     const cin = booking_forms.querySelector(".cin-date").value;
     const cout = booking_forms.querySelector(".cout-date").value;
+    const date1 = new Date(cin);
+    const date2 = new Date(cout);
+    const total_value = (date2 - date1)/(1000 * 60 * 60 * 24);
     const hotel_id = id;
     let room_type;
     if(roomtype === 'EXECUTIVE ROOM') room_type = 2;
@@ -60,7 +62,7 @@ const booking_data = async (event) => {
         hotel_id,
       }),
     });
-    
+    console.log(total_value)
     const data = await result.json();
     if (data.status === "200") {
       const result = await fetch("/payment", {
@@ -70,6 +72,7 @@ const booking_data = async (event) => {
         },
         body: JSON.stringify({
           room_type: room_type,
+          quantity: total_value,
         }),
       });
       const url = await result.json();

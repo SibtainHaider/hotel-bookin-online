@@ -60,7 +60,7 @@ app.get("/bookme:location:room", authenticate, async (req, res) => {
   res.render("bookme");
 });
 app.post("/booking", authenticate, async (req, res) => {
-  const { id,room } = req.body;
+  const { id, room } = req.body;
   if (res.locals.username) {
     const { rows: user_detail } = await pool.query(
       `SELECT * FROM customer WHERE username = '${res.locals.username}'`
@@ -68,12 +68,17 @@ app.post("/booking", authenticate, async (req, res) => {
     const { rows: hotel_detail } = await pool.query(
       `SELECT * FROM hotel WHERE hotel_id = '${id}'`
     );
-    console.log(room)
-    const {rows : room_details} = await pool.query(
+    console.log(room);
+    const { rows: room_details } = await pool.query(
       `SELECT * FROM room_type WHERE room_type = '${room} ROOM' and hotel_id = '${id}'`
-    )
+    );
     console.log(room_details);
-    res.send({ status: "200", user: user_detail[0], hotel: hotel_detail[0], room: room_details[0] });
+    res.send({
+      status: "200",
+      user: user_detail[0],
+      hotel: hotel_detail[0],
+      room: room_details[0],
+    });
   } else {
     res.send({ status: "300" });
   }
@@ -110,7 +115,7 @@ app.post("/", authenticate, async (req, res) => {
 });
 app.post("/search", authenticate, async (req, res) => {
   const { location } = req.body;
-  const {room} = req.body;
+  const { room } = req.body;
   try {
     res.send({
       path: `/bookme:${location}:${room}`,
@@ -125,8 +130,7 @@ app.post("/bookme", authenticate, async (req, res) => {
   const { room } = req.body;
   // console.log(room)
   try {
-    if(room !== 'ANY')
-    {
+    if (room !== "ANY") {
       const { rows: room_details } = await pool.query(
         `SELECT * FROM hotel, room_type WHERE hotel.hotel_id=room_type.hotel_id AND hotel.city='${location}' AND room_type.room_type='${room} ROOM' ORDER BY rating_stars DESC`
       );
@@ -135,9 +139,7 @@ app.post("/bookme", authenticate, async (req, res) => {
         room_details,
         status: "200",
       });
-    }
-    else
-    {
+    } else {
       const { rows: room_details } = await pool.query(
         `SELECT * FROM hotel FULL JOIN room_type ON hotel.hotel_id=room_type.hotel_id WHERE hotel.hotel_id=room_type.hotel_id AND hotel.city='${location}' ORDER BY rating_stars DESC`
       );
@@ -147,7 +149,6 @@ app.post("/bookme", authenticate, async (req, res) => {
         status: "200",
       });
     }
-    
   } catch (err) {
     console.log(err);
   }
@@ -239,19 +240,18 @@ app.post("/form", authenticate, async (req, res) => {
 });
 app.post("/payment", authenticate, async (req, res) => {
   try {
-
-    const { room_type } = req.body;
+    const { room_type,quantity } = req.body;
     const price = [
       "price_1N7M0DLu45q80UD47qBMYgNH",
       "price_1N7LzjLu45q80UD4BLlo8iwL",
       "price_1N7LzELu45q80UD45YzbhBm6",
     ];
-  
+
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
           price: price[room_type],
-          quantity: 1,
+          quantity: quantity,
         },
       ],
       mode: "payment",
@@ -259,8 +259,8 @@ app.post("/payment", authenticate, async (req, res) => {
     });
     res.send({ path: session.url });
   } catch (err) {
-    console.log(err)
-    res.send({path:'http://localhost:8800/failure'})
+    console.log(err);
+    res.send({ path: "http://localhost:8800/failure" });
   }
 });
 app.get("/success", authenticate, async (req, res) => {
@@ -274,19 +274,26 @@ app.get("/reviews", authenticate, async (req, res) => {
 });
 
 app.post("/reviews", authenticate, async (req, res) => {
-  
   try {
-      const { rows: reviews } = await pool.query(
-        `SELECT * FROM review`
-      );
-    res.send({data:reviews})
+    const { rows: reviews } = await pool.query(`SELECT * FROM reviews`);
+    res.send({ data: reviews });
   } catch (err) {
     console.log(err);
   }
 });
 app.post("/PostReviews", authenticate, async (req, res) => {
-  
-  res.send({path: "/reviews"})
+  const { review, star } = req.body;
+  console.log(review,star);
+  try {
+    const { rows: reviews } = await pool.query(
+      `insert into review (customer_id,review_comment, rating)
+      values 
+        ((SELECT customer_id FROM customer where username = '${res.locals.username}'),'${review}',${star})`
+    );
+    res.send({ path: "/reviews" });
+  } catch (err) {
+    console.log(err);
+  }
 });
 app.listen(port, () => {
   console.log(`Listening on port ${port} at http://localhost:${port}`);

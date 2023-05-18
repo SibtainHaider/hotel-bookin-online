@@ -7,31 +7,48 @@ const total_data = async (event) => {
     });
     const data = await result.json();
     console.log(data);
-    newHTML = ''
+    let newHTML = '';
     for(let i =0; i<data.data.length; i++)
     {
-        newHTML = newHTMl + `<section class="review">
+        newHTML = newHTML + `<section class="review">
         <div class="review-text">
-          <h2>Bob Johnson</h2>
-          <p>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p> 
+          <h2>${data.data[i].f_name} ${data.data[i].l_name}</h2>
+          <h2>${data.data[i].email}</h2>
+          <p>${data.data[i].review_comment}</p>
+          <p>${data.data[i].rating}</p> 
         </div>
       </section>`
     }
+    document.querySelector('.review-whole').innerHTML = newHTML;
 
 }
 total_data();
+const stars = document.querySelectorAll('input[name="rating"]');
+let selectedValue;
 
+stars.forEach(star => {
+  star.addEventListener('click', () => {
+
+    selectedValue = star.value;
+
+  });
+});
 const form = document.querySelector('.review-form');
 form.addEventListener('submit', async (event) => {
-    const res = await fetch("/PostReview", {
+  event.preventDefault();
+  const review = document.querySelector(".review-text-input").value;
+  console.log(selectedValue);
+    const res = await fetch("/PostReviews", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            review: event.target.review.value
+            review: review,
+            star: selectedValue
         })
     })
-    const data = res.json();
+    const data = await res.json();
+    // console.log(data)
     window.location.href = data.path;
 });
