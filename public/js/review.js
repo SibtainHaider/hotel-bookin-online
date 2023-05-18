@@ -13,7 +13,7 @@ const total_data = async (event) => {
         newHTML = newHTML + `<section class="review">
         <div class="review-text">
           <h2>${data.data[i].f_name} ${data.data[i].l_name}</h2>
-          <h2>${data.data[i].email}</h2>
+          <h3>${data.data[i].email}</h3>
           <p>${data.data[i].review_comment}</p>
           <p>${data.data[i].rating}</p> 
         </div>

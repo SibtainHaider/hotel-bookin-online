@@ -115,9 +115,9 @@ VALUES
 
 insert into review (customer_id,review_comment, rating)
 values 
-	(qpbz9j0cS4d4Pwu,'One of the best hotels available at a very reasonable price',4),
-	(CqUuT531GEWPMxT,'Very happy to find all hotel options under one roof',5),
-	(ro6CNLBssTSUSwp,'Very good services',4);
+	('qpbz9j0cS4d4Pwu','One of the best hotels available at a very reasonable price',4),
+	('CqUuT531GEWPMxT','Very happy to find all hotel options under one roof',5),
+	('ro6CNLBssTSUSwp','Very good services',4);
 
 CREATE OR REPLACE VIEW reviews AS
 SELECT email,f_name,l_name,review_comment,rating FROM customer, review WHERE review.customer_id = customer.customer_id;
