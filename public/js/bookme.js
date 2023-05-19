@@ -18,7 +18,7 @@ const booking_data = async (event) => {
   const data = await result.json();
   if (data.status === "200") {
     newhtml = "";
-    // console.log(data.room_details[0]);
+   //  console.log(data.room_details[0]);
     for (let i = 0; i < data.room_details.length; i++) {
       newhtml =
         newhtml +

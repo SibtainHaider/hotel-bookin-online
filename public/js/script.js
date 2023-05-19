@@ -43,8 +43,8 @@ const total_data = async (event) => {
               <ion-icon class="star" name="star"></ion-icon>
             </div>
             <ul>
-              <li><a href="form.html" class="card-link" data-id=${data.hotel[i].hotel_id}>Executive Room: <span>Rs ${data.prices[i][0].price}</span></a></li>
-              <li><a href="form.html" class="card-link" data-id=${data.hotel[i].hotel_id}>Prime Room: <span>Rs ${data.prices[i][1].price}</span></a></li>
+              <li><a href="/form" class="card-link" data-id=${data.hotel[i].hotel_id}>Executive Room: <span>Rs ${data.prices[i][0].price}</span></a></li>
+              <li><a href="/form" class="card-link" data-id=${data.hotel[i].hotel_id}>Prime Room: <span>Rs ${data.prices[i][1].price}</span></a></li>
               <li><a href="/form" class="card-link" data-id=${data.hotel[i].hotel_id}>Deluxe Room: <span>Rs ${data.prices[i][2].price}</span></a></li>
             </ul>
           </div>
